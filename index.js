@@ -127,37 +127,34 @@ const singleRepo = {
 };
 
 function useUser() {
+  const [user, setUser] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    setTimeout(
-      () => ({
-        user: userInfo,
-        isLoading: true,
-        error: null,
-      }),
-      2000
-    );
-  }, []);
+    setTimeout(() => {
+      setUser(userInfo);
+      setIsLoading(false);
+    }, 2000);
+  }, [setIsLoading, setUser]);
   return {
-    user: {},
-    isLoading: true,
+    user,
+    isLoading,
     error: null,
   };
 }
 
 function useUserSocial() {
+  const [social, setSocial] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    setTimeout(
-      () => ({
-        social: userSocial,
-        isLoading: false,
-      }),
-      2000
-    );
+    setTimeout(() => {
+      setSocial(userSocial);
+      setIsLoading(false);
+    }, 2000);
   }, []);
 
   return {
-    social: userSocial,
-    isLoading: true,
+    social,
+    isLoading,
   };
 }
 
