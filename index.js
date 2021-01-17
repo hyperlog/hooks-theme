@@ -27,9 +27,9 @@ let userSocial = {
 
 const allRepos = [
   {
-    repo_name: "react",
+    repo_name: "movie-review",
     description: "This is sample repo description",
-    repo_full_name: "facebook/react",
+    repo_full_name: "BrainBuzzer/movie-review",
     external_url: "https://github.com/",
     primary_language: "JavaScript",
     visibility: "public",
@@ -71,114 +71,102 @@ const allRepos = [
 // Need to add more detailed analysis in this portion
 const singleRepo = {
   private: false,
-  size: 27,
-  created_at: "2015-09-11T15:09:12.000Z",
+  size: "192",
+  created_at: "2018-05-12T06:33:59.000Z",
   owner_avatar:
     "https://avatars0.githubusercontent.com/u/10351046?u=e537ee0f7b38fc89668dc1d36b4fbcbde6240bc2&v=4",
-  full_name: "BrainBuzzer/vuejs-sublime-complete",
-  html_url: "https://github.com/BrainBuzzer/vuejs-sublime-complete",
-  name: "vuejs-sublime-complete",
-  license: {
-    name: "MIT License",
-    spdx_id: "MIT",
-    key: "mit",
-    url: "http://choosealicense.com/licenses/mit/",
-    node_id: "MDc6TGljZW5zZTEz",
-  },
+  full_name: "BrainBuzzer/movie-review",
+  html_url: "https://github.com/BrainBuzzer/movie-review",
+  name: "movie-review",
   languages: [
+    { id: "HTML", label: "HTML", color: "hsl(12,77.1%,52%)", value: "1597" },
     {
-      id: "Shell",
-      label: "Shell",
-      color: "hsl(97,69.8%,59.8%)",
-      value: 509131,
+      id: "JavaScript",
+      label: "JavaScript",
+      color: "hsl(53,84.4%,64.9%)",
+      value: "29501",
     },
-    {
-      id: "Ruby",
-      label: "Ruby",
-      color: "hsl(359,68.4%,26.1%)",
-      value: 1327,
-    },
-    {
-      id: "Perl",
-      label: "Perl",
-      color: "hsl(193,98%,38.6%)",
-      value: 3816,
-    },
-    {
-      id: "Python",
-      label: "Python",
-      color: "hsl(207,51.4%,42.7%)",
-      value: 2648,
-    },
-    {
-      id: "Makefile",
-      label: "Makefile",
-      color: "hsl(94,65.5%,28.4%)",
-      value: 59,
-    },
-    {
-      id: "Groff",
-      label: "Groff",
-      color: "hsl(0,0%,0%)",
-      value: 4567,
-    },
+    { id: "CSS", label: "CSS", color: "hsl(264,34.1%,36.3%)", value: "5942" },
   ],
-  archived: true,
+  archived: false,
   default_branch: "master",
-  homepage: "",
+  homepage: null,
   owner: "BrainBuzzer",
-  description:
-    "Better Vue.js completions for sublime text with syntax highlighting.",
   commits: {
     last_fetched_commit: {
-      date: "2019-09-05T08:27:22.000Z",
-      sha: "dd49df1b5154dec5100bd4cdcbfd4802099bab68",
+      date: "2018-05-17T08:19:47.000Z",
+      sha: "5511093008d198133033d4d85c8bc9a0aeb1a3d2",
+    },
+    contributors: {
+      BrainBuzzer: {
+        totalAdditions: "22869",
+        days: {
+          "2018-05-17": { additions: "3148", deletions: "2444" },
+          "2018-05-12": { additions: "19721", deletions: "0" },
+        },
+        totalDeletions: "2444",
+      },
     },
   },
-  pushed_at: "2019-09-05T08:27:24.000Z",
-  stargazers_count: 58,
-  contributors: {
-    klee0589: 1,
-    DannyFeliz: 1,
-    nabijaczleweli: 1,
-    BrainBuzzer: 39,
-    maxkoryukov: 2,
-  },
-  tech: {
-    "env-vars": { deletions: 8, insertions: 74 },
-    "flask-sqlalchemy": { deletions: 10, insertions: 17 },
-    "micro-framework": { deletions: 1035, insertions: 2161 },
-    sql: { deletions: 112, insertions: 197 },
-    "unit-testing": { deletions: 726, insertions: 939 },
-    wsgi: { deletions: 35, insertions: 112 },
+  description: "React/Redux based movie review app",
+  pushed_at: "2018-05-17T08:21:05.000Z",
+  contributors: { BrainBuzzer: "2" },
+  stargazers_count: "0",
+  tech_stack: {
+    libs: {
+      "js.react": { deletions: 3, insertions: 191 },
+      "js.redux": { deletions: 1, insertions: 22 },
+      "js.react-redux": { deletions: 3, insertions: 168 },
+    },
+    tags: {
+      "ui-framework": { deletions: 3, insertions: 191 },
+      "state-management": { deletions: 4, insertions: 190 },
+    },
+    tech: { "javascript-web": { deletions: 7, insertions: 381 } },
   },
 };
 
 function useUser() {
+  setTimeout(
+    () => ({
+      user: userInfo,
+      isLoading: true,
+      error: null,
+    }),
+    2000
+  );
   return {
-    user: userInfo,
-    isLoading: false,
+    user: {},
+    isLoading: true,
     error: null,
   };
 }
 
 function useUserSocial() {
+  setTimeout(
+    () => ({
+      social: userSocial,
+      isLoading: false,
+    }),
+    2000
+  );
+
   return {
     social: userSocial,
-    isLoading: false,
+    isLoading: true,
   };
 }
 
 function useAllRepos() {
   const [repos, setRepos] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     setRepos(allRepos);
     setLoading(false);
-    return [repos, loading];
+    return { repos, isLoading };
   }, []);
-  return [repos, loading];
+  return { repos, isLoading };
 }
 
 function useRepo(repo_name) {
